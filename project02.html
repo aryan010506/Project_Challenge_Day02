@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aryan Sunil | 30-Day Coding Challenge</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg:#060606; 
+      --panel:#0f1112; 
+      --muted:#9aa3a8; 
+      --accent:#22c55e;
+      --card:#0e1213; 
+      --soft:#1f2326;
+      --text:#e6edf1;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--panel);
+      padding: 16px 0;
+      border-bottom: 1px solid var(--soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      color: var(--accent);
+      font-size: 24px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand span {
+      color: var(--text);
+    }
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+    .nav-menu a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-menu a:hover {
+      color: var(--accent);
+    }
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    /* Hero Section */
+    .hero {
+      padding: 80px 0;
+      text-align: center;
+      background: var(--panel);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.1) 0%, transparent 50%);
+    }
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease;
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: fadeIn 1.5s ease;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      animation: fadeIn 2s ease;
+    }
+    .btn {
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #051009;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--accent);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--soft);
+    }
+    .btn-secondary:hover {
+      background: var(--soft);
+      color: var(--accent);
+    }
+    
+    /* About Section */
+    .about {
+      padding: 80px 0;
+      background: var(--card);
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      color: var(--accent);
+      font-size: 2.5rem;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+    }
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .skill {
+      background: var(--soft);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+    .about-image {
+      position: relative;
+    }
+    .about-image img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    .experience {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .exp-item {
+      background: var(--panel);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .exp-item i {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+    .exp-item h3 {
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .exp-item p {
+      color: var(--muted);
+    }
+    
+    /* 30-Day Challenge Section */
+    .challenge {
+      padding: 80px 0;
+      background: var(--panel);
+    }
+    .challenge-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .challenge-intro {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+    .progress-container {
+      max-width: 800px;
+      margin: 0 auto 50px;
+      background: var(--card);
+      border-radius: 10px;
+      padding: 20px;
+      border: 1px solid var(--soft);
+    }
+    .progress-bar {
+      height: 20px;
+      background: var(--soft);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 10px;
+      width: 6.66%; /* 2 out of 30 days completed */
+      transition: width 1s ease;
+    }
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .weeks-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    .week-section {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 25px;
+      border: 1px solid var(--soft);
+    }
+    .week-title {
+      color: var(--accent);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--soft);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .week-title i {
+      font-size: 1.5rem;
+    }
+    .days-list {
+      list-style: none;
+    }
+    .day-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--soft);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .day-item:last-child {
+      border-bottom: none;
+    }
+    .day-number {
+      background: var(--soft);
+      color: var(--text);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .day-item.completed .day-number {
+      background: var(--accent);
+      color: #051009;
+    }
+    .day-info {
+      flex: 1;
+    }
+    .day-name {
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .day-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .day-status {
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+    .status-completed {
+      background: rgba(34, 197, 94, 0.2);
+      color: var(--accent);
+    }
+    .status-upcoming {
+      background: var(--soft);
+      color: var(--muted);
+    }
+    
+    /* Projects Section */
+    .projects {
+      padding: 80px 0;
+      background: var(--card);
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .controls input {
+      padding: 12px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--soft);
+      background: var(--panel);
+      color: var(--text);
+      width: 300px;
+    }
+    .filter-btn {
+      padding: 12px 20px;
+      border-radius: 6px;
+      border: 1px solid var(--soft);
+      background: var(--panel);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #051009;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--soft);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 20px;
+    }
+    .card h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+    .card p {
+      color: var(--muted);
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+    }
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+    .tag {
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      border-radius: 4px;
+      background: var(--soft);
+      color: var(--muted);
+    }
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .card-btn {
+      padding: 8px 16px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s;
+    }
+    .card-btn.primary {
+      background: var(--accent);
+      color: #051009;
+    }
+    .card-btn.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--soft);
+    }
+    .card-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    
+    /* Contact Section */
+    .contact {
+      padding: 80px 0;
+      background: var(--panel);
+    }
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .contact-item i {
+      font-size: 1.5rem;
+      color: var(--accent);
+      width: 40px;
+    }
+    .contact-item div {
+      color: var(--muted);
+      flex: 1;
+    }
+    .contact-item h3 {
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+    .social-link:hover {
+      background: var(--accent);
+      color: #051009;
+      transform: translateY(-5px);
+    }
+    .contact-form {
+      background: var(--card);
+      padding: 30px;
+      border-radius: 10px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--soft);
+      background: var(--panel);
+      color: var(--text);
+      font-family: inherit;
+    }
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    .submit-btn {
+      background: var(--accent);
+      color: #051009;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+    .submit-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--soft);
+      background: var(--card);
+    }
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-logo {
+      color: var(--accent);
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    .copyright {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .about-content,
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--panel);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: left 0.3s;
+        gap: 30px;
+      }
+      .nav-menu.active {
+        left: 0;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .weeks-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container">
+    <div class="brand">
+      <i class="fas fa-code"></i>
+      Aryan<span>Sunil</span>
+    </div>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#challenge">30-Day Challenge</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<section id="home" class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>30-Day Coding Challenge</h1>
+      <p>Follow my journey as I build 30 projects in 30 days to level up my skills in web development, data science, and AI.</p>
+      <div class="hero-buttons">
+        <a href="#challenge" class="btn btn-primary">
+          <i class="fas fa-fire"></i> View Challenge Progress
+        </a>
+        <a href="#projects" class="btn btn-secondary">
+          <i class="fas fa-laptop-code"></i> See All Projects
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="container">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>I am a passionate and self-driven 2nd-year BSc Data Science student at Mumbai University, striving to become a successful Data Scientist. With a strong foundation in both development and analytics, I specialize in full-stack web development and data science technologies.</p>
+        <p>My technical skills include Python, JavaScript, HTML/CSS, Flask, MySQL, MongoDB, Data Mining, and Data Warehousing. I have completed multiple internships in web development, AI/ML, and data science, through which I have built real-world projects and strengthened my practical knowledge.</p>
+        <p>I maintain an active GitHub profile with over 35 repositories showcasing diverse projects, and I've grown a professional network of 500+ connections on LinkedIn. I am constantly learning and collaborating, driven by a deep curiosity and a commitment to building intelligent, data-driven solutions.</p>
+        <div class="skills">
+          <span class="skill">Python</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">HTML/CSS</span>
+          <span class="skill">Flask</span>
+          <span class="skill">MySQL</span>
+          <span class="skill">MongoDB</span>
+          <span class="skill">Data Science</span>
+          <span class="skill">Machine Learning</span>
+        </div>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Aryan Sunil">
+      </div>
+    </div>
+    <div class="experience">
+      <div class="exp-item">
+        <i class="fas fa-graduation-cap"></i>
+        <h3>Education</h3>
+        <p>BSc Data Science, Mumbai University (2022-2025)</p>
+      </div>
+      <div class="exp-item">
+        <i class="fas fa-briefcase"></i>
+        <h3>Experience</h3>
+        <p>3+ Internships in Web Dev & Data Science</p>
+      </div>
+      <div class="exp-item">
+        <i class="fas fa-project-diagram"></i>
+        <h3>Projects</h3>
+        <p>35+ repositories on GitHub</p>
+      </div>
+      <div class="exp-item">
+        <i class="fas fa-network-wired"></i>
+        <h3>Network</h3>
+        <p>500+ LinkedIn connections</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="challenge" class="challenge">
+  <div class="container">
+    <h2 class="section-title">30-Day Coding Challenge</h2>
+    <p class="challenge-intro">I'm undertaking a 30-day challenge to build 30 projects that span web development, data science, and AI. Follow along as I document my journey, share insights, and push my coding skills to the next level!</p>
+    
+    <div class="progress-container">
+      <h3>Challenge Progress</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text">
+        <span>Day 1</span>
+        <span id="progressStatus">2/30 Days Completed</span>
+        <span>Day 30</span>
+      </div>
+    </div>
+    
+    <div class="weeks-container">
+      <!-- Week 1 -->
+      <div class="week-section">
+        <h3 class="week-title">
+          <i class="fas fa-laptop-code"></i>
+          Week 1: Web Dev Basics
+        </h3>
+        <ul class="days-list">
+          <li class="day-item completed">
+            <span class="day-number">1</span>
+            <div class="day-info">
+              <div class="day-name">Responsive Navbar + Hero Section</div>
+              <div class="day-desc">Foundations + UI Projects</div>
+            </div>
+            <span class="day-status status-completed">Completed</span>
+          </li>
+          <li class="day-item completed">
+            <span class="day-number">2</span>
+            <div class="day-info">
+              <div class="day-name">Blog Website (with search/filter)</div>
+              <div class="day-desc">Replaces portfolio project</div>
+            </div>
+            <span class="day-status status-completed">Completed</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">3</span>
+            <div class="day-info">
+              <div class="day-name">Pomodoro Timer App</div>
+              <div class="day-desc">Replaces digital clock project</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">4</span>
+            <div class="day-info">
+              <div class="day-name">Markdown Note-Taking App</div>
+              <div class="day-desc">LocalStorage implementation</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">5</span>
+            <div class="day-info">
+              <div class="day-name">Currency Converter</div>
+              <div class="day-desc">API integration project</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">6</span>
+            <div class="day-info">
+              <div class="day-name">Typing Speed Test App</div>
+              <div class="day-desc">Replaces simple calculator</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">7</span>
+            <div class="day-info">
+              <div class="day-name">Quote Generator</div>
+              <div class="day-desc">API or JSON file integration</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Week 2 -->
+      <div class="week-section">
+        <h3 class="week-title">
+          <i class="fab fa-python"></i>
+          Week 2: Python + Automation
+        </h3>
+        <ul class="days-list">
+          <li class="day-item">
+            <span class="day-number">8</span>
+            <div class="day-info">
+              <div class="day-name">File Organizer Script</div>
+              <div class="day-desc">Sorts files by type</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">9</span>
+            <div class="day-info">
+              <div class="day-name">YouTube Video Downloader</div>
+              <div class="day-desc">Using pytube library</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">10</span>
+            <div class="day-info">
+              <div class="day-name">PDF Merger & Splitter</div>
+              <div class="day-desc">Using PyPDF2 library</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">11</span>
+            <div class="day-info">
+              <div class="day-name">Password Generator + Manager</div>
+              <div class="day-desc">CLI/GUI implementation</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">12</span>
+            <div class="day-info">
+              <div class="day-name">Markdown to HTML Converter</div>
+              <div class="day-desc">Text processing project</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">13</span>
+            <div class="day-info">
+              <div class="day-name">Basic Web Scraper</div>
+              <div class="day-desc">Scrape headlines from sites</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">14</span>
+            <div class="day-info">
+              <div class="day-name">QR Code Generator</div>
+              <div class="day-desc">Utility application</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Week 3 -->
+      <div class="week-section">
+        <h3 class="week-title">
+          <i class="fas fa-chart-bar"></i>
+          Week 3: Data Science + Visualization
+        </h3>
+        <ul class="days-list">
+          <li class="day-item">
+            <span class="day-number">15</span>
+            <div class="day-info">
+              <div class="day-name">Exploratory Data Analysis</div>
+              <div class="day-desc">Using Kaggle dataset</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">16</span>
+            <div class="day-info">
+              <div class="day-name">Netflix Dataset Analysis</div>
+              <div class="day-desc">Genres, ratings, trends</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">17</span>
+            <div class="day-info">
+              <div class="day-name">COVID-19 Data Dashboard</div>
+              <div class="day-desc">Interactive visualization</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">18</span>
+            <div class="day-info">
+              <div class="day-name">IPL / Cricket Data Analysis</div>
+              <div class="day-desc">Sports analytics project</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">19</span>
+            <div class="day-info">
+              <div class="day-name">Movie Recommendation System</div>
+              <div class="day-desc">Using cosine similarity</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">20</span>
+            <div class="day-info">
+              <div class="day-name">Spam Email Classifier</div>
+              <div class="day-desc">ML model implementation</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">21</span>
+            <div class="day-info">
+              <div class="day-name">Interactive Data Dashboard</div>
+              <div class="day-desc">Built with Streamlit</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Week 4 -->
+      <div class="week-section">
+        <h3 class="week-title">
+          <i class="fas fa-robot"></i>
+          Week 4: AI + Advanced Projects
+        </h3>
+        <ul class="days-list">
+          <li class="day-item">
+            <span class="day-number">22</span>
+            <div class="day-info">
+              <div class="day-name">Face Detection App</div>
+              <div class="day-desc">Using OpenCV</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">23</span>
+            <div class="day-info">
+              <div class="day-name">Chatbot using Python</div>
+              <div class="day-desc">Basic NLP implementation</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">24</span>
+            <div class="day-info">
+              <div class="day-name">Flask App – Text Summarizer</div>
+              <div class="day-desc">NLP web application</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">25</span>
+            <div class="day-info">
+              <div class="day-name">Image Classifier</div>
+              <div class="day-desc">Cats vs dogs classification</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">26</span>
+            <div class="day-info">
+              <div class="day-name">Voice Assistant</div>
+              <div class="day-desc">Speech recognition + TTS</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">27</span>
+            <div class="day-info">
+              <div class="day-name">Resume Parser</div>
+              <div class="day-desc">Extract text & skills</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">28</span>
+            <div class="day-info">
+              <div class="day-name">Flask/Django E-Commerce Backend</div>
+              <div class="day-desc">Mini backend project</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">29</span>
+            <div class="day-info">
+              <div class="day-name">AI-Powered Portfolio Assistant</div>
+              <div class="day-desc">Q&A bot trained on your resume</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+          <li class="day-item">
+            <span class="day-number">30</span>
+            <div class="day-info">
+              <div class="day-name">Final Showcase Project</div>
+              <div class="day-desc">Full-stack ML web app</div>
+            </div>
+            <span class="day-status status-upcoming">Upcoming</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="projects">
+  <div class="container">
+    <h2 class="section-title">My Projects</h2>
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search projects...">
+      <button data-cat="all" class="filter-btn active">All</button>
+      <button data-cat="web" class="filter-btn">Web Dev</button>
+      <button data-cat="ds" class="filter-btn">Data Science</button>
+      <button data-cat="ai" class="filter-btn">AI/ML</button>
+    </div>
+    <div class="grid">
+      <div class="card" data-cat="web">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=200&q=80" alt="Portfolio Project">
+        <div class="card-content">
+          <h3>Personal Portfolio Website</h3>
+          <p>A responsive portfolio website built with HTML, CSS, and JavaScript to showcase my projects and skills.</p>
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+          <div class="card-actions">
+            <a href="#" class="card-btn primary">
+              <i class="fas fa-eye"></i> Live Demo
+            </a>
+            <a href="#" class="card-btn secondary">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-cat="web">
+        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=200&q=80" alt="Blog Project">
+        <div class="card-content">
+          <h3>Blog Website with Search</h3>
+          <p>A technical blog website with search and filter functionality built as part of my 30-day challenge.</p>
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+          <div class="card-actions">
+            <a href="#" class="card-btn primary">
+              <i class="fas fa-eye"></i> Live Demo
+            </a>
+            <a href="#" class="card-btn secondary">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-cat="ds">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=200&q=80" alt="Data Analysis">
+        <div class="card-content">
+          <h3>Sales Data Analysis</h3>
+          <p>Performed comprehensive analysis on sales data to identify trends and provide business insights using Python and Pandas.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Data Visualization</span>
+          </div>
+          <div class="card-actions">
+            <a href="#" class="card-btn primary">
+              <i class="fas fa-eye"></i> View Analysis
+            </a>
+            <a href="#" class="card-btn secondary">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="container">
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="contact-content">
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <div>
+            <h3>Email</h3>
+            <p>aryansunil.work@gmail.com</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <h3>Location</h3>
+            <p>Mumbai, India</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-globe"></i>
+          <div>
+            <h3>Website</h3>
+            <p>aryansunilportfolio.netlify.app</p>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <i class="fas fa-code"></i> Aryan<span>Sunil</span>
+      </div>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#challenge">30-Day Challenge</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <p class="copyright">© 2023 Aryan Sunil. Developed during my 30 Projects Challenge</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const navMenu = document.getElementById('navMenu');
+  
+  mobileMenuBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+      ? '<i class="fas fa-times"></i>' 
+      : '<i class="fas fa-bars'></i>';
+  });
+  
+  // Filter functionality
+  const search = document.getElementById('search');
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card');
+  
+  function updateFilter() {
+    const term = search.value.toLowerCase();
+    const cat = document.querySelector('.filter-btn.active').dataset.cat;
+    
+    cards.forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      const description = card.querySelector('p').textContent.toLowerCase();
+      const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
+      
+      const matchesSearch = title.includes(term) || description.includes(term) || 
+                           tags.some(tag => tag.includes(term));
+      const matchesCategory = cat === 'all' || card.dataset.cat === cat;
+      
+      card.style.display = (matchesSearch && matchesCategory) ? 'block' : 'none';
+    });
+  }
+  
+  search.addEventListener('input', updateFilter);
+  
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelector('.filter-btn.active').classList.remove('active');
+      button.classList.add('active');
+      updateFilter();
+    });
+  });
+  
+  // Form submission
+  const contactForm = document.getElementById('contactForm');
+  
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Thank you for your message! I will get back to you soon.');
+    contactForm.reset();
+  });
+  
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+        
+        // Close mobile menu if open
+        if (navMenu.classList.contains('active')) {
+          navMenu.classList.remove('active');
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+      }
+    });
+  });
+  
+  // Challenge progress animation
+  document.addEventListener('DOMContentLoaded', function() {
+    const progressFill = document.getElementById('progressFill');
+    progressFill.style.width = '6.66%'; // 2 out of 30 days completed
+  });
+</script>
+</body>
+</html>
