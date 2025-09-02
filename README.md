@@ -1,12 +1,12 @@
 # Project_Challenge_Day02
 
-📖 Blog Website – Day 2 of 30 Days Coding Challenge
+#📖 Blog Website – Day 2 of 30 Days Coding Challenge
 
-This project is part of my 30-Day Coding Challenge, where I build one project every day to improve my development skills.
+#This project is part of my 30-Day Coding Challenge, where I build one project every day to improve my development skills.
 
-🌟 About the Project
+#🌟 About the Project
 
-On Day 2, I created a responsive blog website with:
+#On Day 2, I created a responsive blog website with:
 
 Dark + green theme (same as my portfolio)
 
@@ -18,7 +18,7 @@ Clean and professional UI design
 
 The blog currently features About Me details taken directly from my portfolio and will be expanded with more posts in the future.
 
-👥 Collaboration
+#👥 Collaboration
 
 This challenge is something I’m doing together with my coding partner Swara.
 We’re pushing each other to stay consistent and level up our skills day by day 🚀.
